@@ -28,6 +28,7 @@ body {
             padding: 20px;
             clear: both;
             text-align: right;
+            opacity: 0; /* Add initial opacity */
 
             &:not(:first-child) {
                 margin-top: -60px;
@@ -109,4 +110,19 @@ body {
             }
         }
     }
+}
+
+/* Add animation */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Apply animation to timeline entries */
+.entries .entry {
+    animation: fadeIn 0.5s ease-in-out forwards;
 }
