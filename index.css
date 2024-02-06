@@ -43,8 +43,9 @@ ul::before {
   content: "";
   grid-column: 1;
   grid-row: 1 / span 20;
-  background: rgb(225, 225, 225);
+  background: rgb(59, 47, 47); /* Time line Color */
   border-radius: calc(var(--line-w) / 2);
+  animation: moveline 5s linear forwards;
 }
 
 /* columns*/
@@ -69,18 +70,18 @@ ul li .date {
   --dateH: 3rem;
   height: var(--dateH);
   margin-inline: calc(var(--inlineP) * -1);
-
+  
   text-align: center;
   background-color: var(--accent-color);
-
+  
   color: white;
   font-size: 1.25rem;
   font-weight: 700;
-
+  
   display: grid;
   place-content: center;
   position: relative;
-
+  
   border-radius: calc(var(--dateH) / 2) 0 0 calc(var(--dateH) / 2);
 }
 
@@ -93,7 +94,7 @@ ul li .date::before {
   background-image: linear-gradient(rgba(0, 0, 0, 0.2) 100%, transparent);
   position: absolute;
   top: 100%;
-
+  
   clip-path: polygon(0 0, 100% 0, 0 100%);
   right: 0;
 }
@@ -108,7 +109,7 @@ ul li .date::after {
   border: 0.3rem solid var(--accent-color);
   border-radius: 50%;
   top: 50%;
-
+  
   transform: translate(50%, -50%);
   right: calc(100% + var(--col-gap) + var(--line-w) / 2);
 }
@@ -143,6 +144,7 @@ ul li .descr::before {
   border-radius: 50%;
   filter: blur(4px);
   transform: translate(-50%, 50%);
+  
 }
 ul li .title::before {
   bottom: calc(100% + 0.125rem);
@@ -152,8 +154,16 @@ ul li .descr::before {
   z-index: -1;
   bottom: 0.25rem;
 }
+ul li:nth-child(odd) {
+  animation: slideInLeft 0.5s ease-out ;
+}
+ul li:nth-child(even) {
+  animation: slideInRigth 0.5s ease-out ;
+}
 
+/* responsive */
 @media (min-width: 40rem) {
+
   ul {
     grid-template-columns: 1fr var(--line-w) 1fr;
   }
@@ -166,17 +176,17 @@ ul li .descr::before {
   ul li:nth-child(even) {
     grid-column: 3;
   }
-
+  
   /* start second card */
   ul li:nth-child(2) {
     grid-row: 2/4;
   }
-
+  
   ul li:nth-child(odd) .date::before {
     clip-path: polygon(0 0, 100% 0, 100% 100%);
     left: 0;
   }
-
+  
   ul li:nth-child(odd) .date::after {
     transform: translate(-50%, -50%);
     left: calc(100% + var(--col-gap) + var(--line-w) / 2);
@@ -192,4 +202,34 @@ ul li .descr::before {
 }
 .credits a {
   color: var(--color);
+}
+
+/* animation */
+@keyframes moveline {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes slideInRigth {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
