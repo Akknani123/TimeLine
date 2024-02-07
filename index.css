@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-body {
+.timeline {
   --color: rgba(30, 30, 30);
   --bgColor: rgba(245, 245, 245);
   min-height: 100vh;
@@ -21,11 +21,11 @@ body {
   background: var(--bgColor);
 }
 
-h1 {
+/* h1 {
   text-align: center;
-}
+} */
 
-ul {
+.time {
   --col-gap: 2rem;
   --row-gap: 2rem;
   --line-w: 0.25rem;
@@ -39,7 +39,7 @@ ul {
 }
 
 /* line */
-ul::before {
+.time::before {
   content: "";
   grid-column: 1;
   grid-row: 1 / span 20;
@@ -51,12 +51,12 @@ ul::before {
 /* columns*/
 
 /* row gaps */
-ul li:not(:last-child) {
+.time .line:not(:last-child) {
   margin-bottom: var(--row-gap);
 }
 
 /* card */
-ul li {
+.time .line {
   grid-column: 2;
   --inlineP: 1.5rem;
   margin-inline: var(--inlineP);
@@ -66,7 +66,7 @@ ul li {
 }
 
 /* date */
-ul li .date {
+.time .line .date {
   --dateH: 3rem;
   height: var(--dateH);
   margin-inline: calc(var(--inlineP) * -1);
@@ -86,7 +86,7 @@ ul li .date {
 }
 
 /* date flap */
-ul li .date::before {
+.time .line .date::before {
   content: "";
   width: var(--inlineP);
   aspect-ratio: 1;
@@ -100,7 +100,7 @@ ul li .date::before {
 }
 
 /* circle */
-ul li .date::after {
+.time .line .date::after {
   content: "";
   position: absolute;
   width: 2rem;
@@ -115,26 +115,26 @@ ul li .date::after {
 }
 
 /* title descr */
-ul li .title,
-ul li .descr {
+.time .line .title,
+.time .line .descr {
   background: var(--bgColor);
   position: relative;
   padding-inline: 1.5rem;
 }
-ul li .title {
+.time .line .title {
   overflow: hidden;
   padding-block-start: 1.5rem;
   padding-block-end: 1rem;
   font-weight: 500;
 }
-ul li .descr {
+.time .line .descr {
   padding-block-end: 1.5rem;
   font-weight: 300;
 }
 
 /* shadows */
-ul li .title::before,
-ul li .descr::before {
+.time .line .title::before,
+.time .line .descr::before {
   content: "";
   position: absolute;
   width: 90%;
@@ -146,52 +146,52 @@ ul li .descr::before {
   transform: translate(-50%, 50%);
   
 }
-ul li .title::before {
+.time .line .title::before {
   bottom: calc(100% + 0.125rem);
 }
 
-ul li .descr::before {
+.time .line .descr::before {
   z-index: -1;
   bottom: 0.25rem;
 }
-ul li:nth-child(odd) {
+.time .line:nth-child(odd) {
   animation: slideInLeft 0.5s ease-out ;
 }
-ul li:nth-child(even) {
+.time .line:nth-child(even) {
   animation: slideInRigth 0.5s ease-out ;
 }
 
 /* responsive */
 @media (min-width: 40rem) {
 
-  ul {
+  .time {
     grid-template-columns: 1fr var(--line-w) 1fr;
   }
-  ul::before {
+  .time::before {
     grid-column: 2;
   }
-  ul li:nth-child(odd) {
+  .time .line:nth-child(odd) {
     grid-column: 1;
   }
-  ul li:nth-child(even) {
+  .time .line:nth-child(even) {
     grid-column: 3;
   }
   
   /* start second card */
-  ul li:nth-child(2) {
+  .time .line:nth-child(2) {
     grid-row: 2/4;
   }
   
-  ul li:nth-child(odd) .date::before {
+  .time .line:nth-child(odd) .date::before {
     clip-path: polygon(0 0, 100% 0, 100% 100%);
     left: 0;
   }
   
-  ul li:nth-child(odd) .date::after {
+  .time .line:nth-child(odd) .date::after {
     transform: translate(-50%, -50%);
     left: calc(100% + var(--col-gap) + var(--line-w) / 2);
   }
-  ul li:nth-child(odd) .date {
+  .time .line:nth-child(odd) .date {
     border-radius: 0 calc(var(--dateH) / 2) calc(var(--dateH) / 2) 0;
   }
 }
